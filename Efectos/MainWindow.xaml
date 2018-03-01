@@ -1,0 +1,16 @@
+﻿<Window x:Class="Efectos.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Efectos"
+        mc:Ignorable="d"
+        Title="Efectos" Height="350" Width="525">
+    <Grid>
+        <TextBox x:Name="txtruta" HorizontalAlignment="Left" Height="28" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="396"/>
+        <Button x:Name="btnexaminar" Content="Examinar" HorizontalAlignment="Left" Height="28" Margin="411,10,0,0" VerticalAlignment="Top" Width="96" Click="btnexaminar_Click"/>
+        <Button x:Name="btnrepro" Content="Reproducir" HorizontalAlignment="Left" Height="29" Margin="10,43,0,0" VerticalAlignment="Top" Width="102" Click="btnrepro_Click"/>
+        <Button x:Name="btnefect" Content="Efecto" HorizontalAlignment="Left" Height="29" Margin="117,43,0,0" VerticalAlignment="Top" Width="98" Click="btnefect_Click"/>
+
+    </Grid>
+</Window>
