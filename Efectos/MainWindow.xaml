@@ -6,11 +6,12 @@
         xmlns:local="clr-namespace:Efectos"
         mc:Ignorable="d"
         Title="Efectos" Height="350" Width="525">
-    <Grid>
+    <Grid x:Name="sldfactor">
         <TextBox x:Name="txtruta" HorizontalAlignment="Left" Height="28" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="396"/>
         <Button x:Name="btnexaminar" Content="Examinar" HorizontalAlignment="Left" Height="28" Margin="411,10,0,0" VerticalAlignment="Top" Width="96" Click="btnexaminar_Click"/>
         <Button x:Name="btnrepro" Content="Reproducir" HorizontalAlignment="Left" Height="29" Margin="10,43,0,0" VerticalAlignment="Top" Width="102" Click="btnrepro_Click"/>
         <Button x:Name="btnefect" Content="Efecto" HorizontalAlignment="Left" Height="29" Margin="117,43,0,0" VerticalAlignment="Top" Width="98" Click="btnefect_Click"/>
+        <Slider x:Name="sldfactor1" HorizontalAlignment="Left" Height="13" Margin="10,90,0,0" VerticalAlignment="Top" Width="497" ValueChanged="sldfactor1_ValueChanged" Maximum="2"/>
 
     </Grid>
 </Window>

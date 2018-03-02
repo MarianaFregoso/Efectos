@@ -69,9 +69,18 @@ namespace Efectos
                 {
                     waveout.Stop();
                 }
-                efectoProvider = new efectos(reader);
+                efectoProvider = new efectos(reader, (float) sldfactor1.Value);
                 waveout.Init(efectoProvider);
                 waveout.Play();
+            }
+        }
+
+        private void sldfactor1_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            if (efectoProvider != null)
+            {
+                efectoProvider.Factor =
+                    (float) sldfactor1.Value;
             }
         }
     }
