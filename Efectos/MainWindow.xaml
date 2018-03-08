@@ -12,6 +12,7 @@
         <Button x:Name="btnrepro" Content="Reproducir" HorizontalAlignment="Left" Height="29" Margin="10,43,0,0" VerticalAlignment="Top" Width="102" Click="btnrepro_Click"/>
         <Button x:Name="btnefect" Content="Efecto" HorizontalAlignment="Left" Height="29" Margin="117,43,0,0" VerticalAlignment="Top" Width="98" Click="btnefect_Click"/>
         <Slider x:Name="sldfactor1" HorizontalAlignment="Left" Height="13" Margin="10,90,0,0" VerticalAlignment="Top" Width="497" ValueChanged="sldfactor1_ValueChanged" Maximum="2"/>
+        <Button Content="Delay" HorizontalAlignment="Left" Margin="220,43,0,0" VerticalAlignment="Top" Width="77" Height="29" Click="Button_Click"/>
 
     </Grid>
 </Window>
