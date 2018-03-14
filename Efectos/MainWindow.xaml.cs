@@ -93,7 +93,7 @@ namespace Efectos
                 {
                     waveout.Stop();
                 }
-                delayProvider = new Delay;
+                delayProvider = new Delay(reader);
                 waveout.Init(delayProvider);
                 waveout.Play();
             }
