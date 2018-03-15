@@ -98,5 +98,14 @@ namespace Efectos
                 waveout.Play();
             }
         }
+
+        private void sliderdela_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            if ( delayProvider != null)
+            {
+
+                delayProvider.offsetTiempoMS = (int)sliderdela.Value;
+            }
+        }
     }
 }

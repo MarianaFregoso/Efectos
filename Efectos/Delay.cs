@@ -9,19 +9,21 @@ namespace Efectos
 {
     class Delay : ISampleProvider
     {
+        internal float read;
         private ISampleProvider fuente;
 
-        int offsetTiempoMS;
+        public int offsetTiempoMS;
         List<float> muestras = new List<float>();
         public Delay(ISampleProvider fuente)
         {
             this.fuente = fuente;
-            offsetTiempoMS = 1000;
+            offsetTiempoMS = 600;
+            //50ms - 5000ms
         }
 
         public WaveFormat WaveFormat {
             get {
-                throw new NotImplementedException();
+                return fuente.WaveFormat;
             }
         }
           
@@ -33,23 +35,29 @@ namespace Efectos
 
             var read = fuente.Read(buffer, offset, count);
             float tiempoTranscurrido = (float) muestras.Count / (float)fuente.WaveFormat.SampleRate;
-
+            int muestrastrasncurridas = muestras.Count;
             float tiempoTranscurridoMS = tiempoTranscurrido * 1000;
-            int numMuestrasOffsetTiempo = (int) (((float)offsetTiempoMS / 1000.0f) * (float)fuente.WaveFormat.SampleRate);
-            if (tiempoTranscurridoMS > offsetTiempoMS) {
-                for (int i = 0; i < read; i++)
-                {
-                    buffer[offset + i] += muestras[muestras.Count + i - numMuestrasOffsetTiempo];
-                    //   Console.Writeline("Actual: " + (offset + i));
-                    //   Console.Writeline("offset: " + (offset + i - numMuestrasOffsetTiemp));
-                }
-            }
-
-            for (int i = 0; i < buffer.Length; i++)
+            int numMuestrasOffsetTiempo = (int) (((float)offsetTiempoMS / 1000.0f)
+                * (float)fuente.WaveFormat.SampleRate);
+            
+            //añadir muestras a nuestro buffer
+            for (int i = 0; i < read; i++)
             {
                 muestras.Add(buffer[i]);
             }
 
+
+            //mofificar muestras
+            if (tiempoTranscurridoMS > offsetTiempoMS)
+            {
+                for (int i = 0; i < read; i++)
+                {
+                    buffer[i] =
+
+                       buffer[i] += muestras[muestrastrasncurridas +
+                         i - numMuestrasOffsetTiempo];
+                }
+            }
 
             return read;
         }
