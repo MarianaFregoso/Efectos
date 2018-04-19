@@ -14,11 +14,15 @@ namespace Efectos
 
         public int offsetTiempoMS;
         List<float> muestras = new List<float>();
+
+        private int tamañobuffer;
+        private int cantidadmuestrasborradas = 0;
+        private int cantidadmuestrastranscurridas = 0;
         public Delay(ISampleProvider fuente)
         {
             this.fuente = fuente;
             offsetTiempoMS = 600;
-            //50ms - 5000ms
+           tamañobuffer = 20 * fuente.WaveFormat.SampleRate;
         }
 
         public WaveFormat WaveFormat {
@@ -34,8 +38,8 @@ namespace Efectos
           
 
             var read = fuente.Read(buffer, offset, count);
-            float tiempoTranscurrido = (float) muestras.Count / (float)fuente.WaveFormat.SampleRate;
-            int muestrastrasncurridas = muestras.Count;
+            float tiempoTranscurrido = (float) cantidadmuestrastranscurridas / (float)fuente.WaveFormat.SampleRate;
+           
             float tiempoTranscurridoMS = tiempoTranscurrido * 1000;
             int numMuestrasOffsetTiempo = (int) (((float)offsetTiempoMS / 1000.0f)
                 * (float)fuente.WaveFormat.SampleRate);
@@ -46,18 +50,29 @@ namespace Efectos
                 muestras.Add(buffer[i]);
             }
 
+            //quitar elementos de nuestro buffer si se paso del maximo
+            if(muestras.Count > tamañobuffer)
+                { 
+                //ya se paso
+                int diferencia = muestras.Count - tamañobuffer;
+                muestras.RemoveRange(0,diferencia);
+                cantidadmuestrasborradas += diferencia;
+                }
 
             //mofificar muestras
             if (tiempoTranscurridoMS > offsetTiempoMS)
             {
                 for (int i = 0; i < read; i++)
                 {
-                    buffer[i] =
+                    buffer[i] +=
 
-                       buffer[i] += muestras[muestrastrasncurridas +
+                       buffer[i] += 
+                       muestras[(cantidadmuestrastranscurridas - cantidadmuestrasborradas) +
                          i - numMuestrasOffsetTiempo];
                 }
             }
+
+            cantidadmuestrastranscurridas += read;
 
             return read;
         }
